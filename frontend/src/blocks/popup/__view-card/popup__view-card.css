@@ -1,0 +1,7 @@
+.popup__view-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: auto;
+  padding: 0;
+}

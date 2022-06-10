@@ -1,0 +1,13 @@
+.popup__register-image_error {
+  background-image: url(../../../../images/register__image-error.png);
+  width: 120px;
+  height: 120px;
+  margin: 60px auto auto;
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__register-image_error {
+    margin-top: 50px;
+  }
+}

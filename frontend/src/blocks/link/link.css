@@ -1,0 +1,27 @@
+.link {
+  font-size: 18px;
+  line-height: 1.22;
+  text-decoration: none;
+  top: 51px;
+  right: 200px;
+  position: absolute;
+}
+
+.link:hover {
+  opacity: 0.6;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .link {
+    right: 172px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .link {
+    top: 34px;
+    right: 30px;
+    font-size: 14px;
+  }
+}
