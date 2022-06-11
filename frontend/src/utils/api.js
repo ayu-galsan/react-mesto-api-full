@@ -82,7 +82,7 @@ class Api {
 }
 
 const api = new Api({
-  address: "https://api.domenname.students.nomoreparties.sbs/",
+  address: "https://api.domenname.students.nomoreparties.sbs",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
