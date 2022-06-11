@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: ['https://domenname.students.nomoreparties.sbs'],
+  origin: ['http://localhost:3000'],
   credentials: true,
 }));
 
