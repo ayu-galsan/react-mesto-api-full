@@ -12,7 +12,7 @@ var _require = require('celebrate'),
 var cors = require('cors');
 
 var _process$env$PORT = process.env.PORT,
-    PORT = _process$env$PORT === void 0 ? 3000 : _process$env$PORT;
+    PORT = _process$env$PORT === void 0 ? 3001 : _process$env$PORT;
 
 var mongoose = require('mongoose');
 
