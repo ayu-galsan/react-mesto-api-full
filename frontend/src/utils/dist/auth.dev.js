@@ -7,7 +7,7 @@ exports.register = register;
 exports.authorize = authorize;
 exports.getContent = getContent;
 exports.BASE_URL = void 0;
-var BASE_URL = "http://localhost:3001";
+var BASE_URL = "https://api.domenname.students.nomoreparties.sbs/";
 exports.BASE_URL = BASE_URL;
 
 function checkResponse(res) {

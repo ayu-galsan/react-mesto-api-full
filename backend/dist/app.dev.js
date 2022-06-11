@@ -12,7 +12,7 @@ var _require = require('celebrate'),
 var cors = require('cors');
 
 var _process$env$PORT = process.env.PORT,
-    PORT = _process$env$PORT === void 0 ? 3001 : _process$env$PORT;
+    PORT = _process$env$PORT === void 0 ? 3000 : _process$env$PORT;
 
 var mongoose = require('mongoose');
 
@@ -37,7 +37,7 @@ var _require5 = require('./middlewares/logger'),
 var app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ['http://localhost:3000'],
+  origin: ['https://domenname.students.nomoreparties.sbs/'],
   credentials: true
 }));
 app.get('/crash-test', function () {
