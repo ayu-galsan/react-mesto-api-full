@@ -7,7 +7,7 @@ return (
         onClick={onClose}
         type="button"
       ></button>
-      <img className={isRegister ? "popup__register-image" : "popup__register-image_error"} />
+      <img className={isRegister ? "popup__register-image" : "popup__register-image_error"} alt="img"/>
       <h2 className="popup__register-heading">{isRegister ? title : error}</h2>
   </div>
     </div>

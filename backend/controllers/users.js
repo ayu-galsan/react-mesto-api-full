@@ -96,10 +96,6 @@ const createUser = async (req, res, next) => {
   const {
     name, about, avatar, email, password,
   } = req.body;
-  if (!email || !password) {
-    next(new BadRequestError(NotFoundLoginPasswordText));
-    return;
-  }
   try {
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
     const user = new User({

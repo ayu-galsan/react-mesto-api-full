@@ -10,34 +10,33 @@ const {
   likeCard,
   dislikeCard,
 } = require('../controllers/cards');
-const auth = require('../middlewares/auth');
 const { urlRegExp } = require('../utils/constans');
 
-cardsRoutes.get('/', auth, getCards);
+cardsRoutes.get('/', getCards);
 
 cardsRoutes.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     link: Joi.string().required().pattern(urlRegExp),
   }),
-}), auth, createCard);
+}), createCard);
 
 cardsRoutes.delete('/:cardId', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().length(24).hex().required(),
-  }).unknown(true),
-}), auth, deleteCardById);
+  }),
+}), deleteCardById);
 
 cardsRoutes.put('/:cardId/likes', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().length(24).hex().required(),
-  }).unknown(true),
-}), auth, likeCard);
+  }),
+}), likeCard);
 
 cardsRoutes.delete('/:cardId/likes', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().length(24).hex().required(),
-  }).unknown(true),
-}), auth, dislikeCard);
+  }),
+}), dislikeCard);
 
 module.exports = cardsRoutes;

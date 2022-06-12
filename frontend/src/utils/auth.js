@@ -10,9 +10,9 @@ function checkResponse(res) {
 export function register(email, password) {
   return fetch(`${BASE_URL}/signup`, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+      headers: { 
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email,
@@ -26,8 +26,8 @@ export function authorize(email, password) {
   return fetch(`${BASE_URL}/signin`, {
       method: "POST",
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email,

@@ -1,19 +1,25 @@
+import { serverUrl } from "./constants";
+import { getToken } from "./token";
+
 class Api {
-  constructor({ address, headers }) {
+  constructor( address ) {
     this.address = address
-    this._headers = headers;
   }
 
   getInitialCards() {
     return fetch(`${this.address}/cards`, {
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${getToken()}`
+      }
     })
       .then(res => this._getResponseData(res))
   }
 
   getUserData() {
     return fetch(`${this.address}/users/me`, {
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${getToken()}`
+      }
     })
       .then(res => this._getResponseData(res))
   }
@@ -22,7 +28,10 @@ class Api {
     const method = isLiked ? 'DELETE' : 'PUT';
     return fetch(`${this.address}/cards/${id}/likes`, {
       method,
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
     })
       .then(res => this._getResponseData(res))
   }
@@ -30,7 +39,10 @@ class Api {
     deleteCard(id) {
     return fetch(`${this.address}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
     })
       .then(res => this._getResponseData(res))
   }
@@ -38,7 +50,10 @@ class Api {
   editProfile(data) {
     return fetch(`${this.address}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -51,7 +66,10 @@ class Api {
   editAvatar(data) {
     return fetch(`${this.address}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         avatar: data.link
       })
@@ -63,7 +81,10 @@ class Api {
   addNewCard(data) {
     return fetch(`${this.address}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {
+        authorization: `Bearer ${getToken()}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: data.place,
         link: data.link
@@ -81,13 +102,6 @@ class Api {
   }
 }
 
-const api = new Api({
-  address: "https://api.domenname.students.nomoreparties.sbs",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
-  }
-})
+const api = new Api(serverUrl);
 
 export default api;

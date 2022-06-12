@@ -4,7 +4,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const Card = require('../models/card');
 const {
   OK_CODE, CREATED_OK_CODE, NOT_FOUND_ERROR_CODE,
-  NotFoundIdCardErrorText, ValidationErrorText, NotDeleteCardErrorText, FORBIDDEN_ERROR_CODE,
+  NotFoundIdCardErrorText, ValidationErrorText, NotDeleteCardErrorText,
 } = require('../utils/constans');
 
 const getCards = async (req, res, next) => {
@@ -46,14 +46,6 @@ const deleteCardById = async (req, res, next) => {
   } catch (err) {
     if (err.name === 'CastError') {
       next(new BadRequestError(`${ValidationErrorText} при удалении карточки`));
-      return;
-    }
-    if (err.statusCode === NOT_FOUND_ERROR_CODE) {
-      next(new NotFoundError(NotFoundIdCardErrorText));
-      return;
-    }
-    if (err.statusCode === FORBIDDEN_ERROR_CODE) {
-      next(new ForbiddenError(NotDeleteCardErrorText));
       return;
     }
     next(err);

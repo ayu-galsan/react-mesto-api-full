@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import { Route, Switch, Redirect, Link, useHistory } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
@@ -32,10 +32,6 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    tokenCheck();
-  }, []); 
-
-  React.useEffect(() => {
     if(loggedIn) {
     Promise.all([api.getUserData(), api.getInitialCards()])
       .then(([userData, cards]) => {
@@ -44,6 +40,26 @@ function App() {
       })
       .catch((err) => console.log(err));
   }}, [loggedIn]);
+
+  //проверка токена
+  const tokenCheck = useCallback(() => {
+    const token = getToken();
+    if(token) {
+      auth.getContent(token)
+        .then(res => {
+          if(res && res.data) {
+             setEmail(res.data.email);
+             setLoggedIn(true);
+             history.push("/home");
+           } 
+        })
+        .catch(err => console.log(err))
+    }
+  }, [history]) 
+
+  React.useEffect(() => {
+    tokenCheck();
+  }, [tokenCheck]); 
 
 //авторизация пользователя
   function handleLogin(email, password) {
@@ -81,25 +97,10 @@ function handleRegister(email, password) {
 
 //выход пользователя
 function signOut() {
+  removeToken();
   setLoggedIn(false);
   history.push("/sign-in");
 }
-
-//проверка токена
-  function tokenCheck() {
-    const token = getToken();
-    if(token) {
-      auth.getContent(token)
-        .then(res => {
-          if(res && res.data) {
-             setEmail(res.data.email);
-             setLoggedIn(true);
-             history.push("/home");
-           } 
-        })
-        .catch(err => console.log(err))
-}
-  } 
   
   function handleCardLike(card) {
     const isLiked = card.likes.some(user => user === currentUser._id);
